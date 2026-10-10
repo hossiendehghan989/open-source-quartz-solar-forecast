@@ -7,17 +7,16 @@ on:
     paths-ignore: ['README.md']
   pull_request:
     types: [opened, synchronize, reopened]
-  pull_request_target:
-    types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
   branch_ci:
     uses: openclimatefix/.github/.github/workflows/branch_ci.yml@main
+    permissions:
+      contents: read
+      packages: write
     secrets: inherit
     with:
       enable_linting: true
       enable_typechecking: false
       tests_folder: 'tests/unit'
-      tests_matrix: true
       test_python_versions: '["3.11"]'
-      containerfile: 'None'
